@@ -1,0 +1,16 @@
+
+Your Microverse application was deployed!
+
+You can access your application under:
+
+	https://{{ .Values.name }}.{{ .Values.domain }}
+
+Microverse Dashboard for your application is accessible under:
+
+	https://dashboard.{{ .Values.name }}.{{ .Values.domain }}
+
+You can use the microchaos tool in order to test your application. The best
+place to start is to consult documentation with the following command:
+
+	microchaos agent --help
+
