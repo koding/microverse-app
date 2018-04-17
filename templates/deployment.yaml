@@ -1,0 +1,45 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: microverse-app-{{ .Values.name }}
+  labels:
+    app: microverse-app-{{ .Values.name }}
+    chart: microverse-app-{{ .Values.name }}-0.0.1
+    release: {{ .Values.name }}
+    heritage: Tiller
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: microverse-app-{{ .Values.name }}
+      release: {{ .Values.name }}
+  template:
+    metadata:
+      labels:
+        app: microverse-app-{{ .Values.name }}
+        release: {{ .Values.name }}
+    spec:
+      containers:
+        - name: microverse-app-{{ .Values.name }}
+          image: {{ .Values.repository }}/microverse-app-{{ .Values.name }}:{{ .Values.tag }}
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: ice
+              containerPort: 3033
+              protocol: TCP
+            - name: dashboard
+              containerPort: 3030
+              protocol: TCP
+            - name: app
+              containerPort: 3000
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: ice
+          readinessProbe:
+            httpGet:
+              path: /
+              port: ice
+          resources:
+            {}

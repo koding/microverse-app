@@ -1,0 +1,51 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: microverse-app-{{ .Values.name }}
+  labels:
+    app: microverse-app-{{ .Values.name }}
+    chart: microverse-app-{{ .Values.name }}-0.0.1
+    release: {{ .Values.name }}
+    heritage: Tiller
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kubernetes.io/tls-acme: "true"
+spec:
+  tls:
+    - hosts:
+        - {{ .Values.name }}.{{ .Values.domain }}
+      secretName: {{ .Values.name }}-tls
+  rules:
+    - host: {{ .Values.name }}.{{ .Values.domain }}
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: microverse-app-{{ .Values.name }}
+              servicePort: 80
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: microverse-app-{{ .Values.name }}-dashboard
+  labels:
+    app: microverse-app-{{ .Values.name }}-dashboard
+    chart: microverse-app-{{ .Values.name }}-0.0.1
+    release: {{ .Values.name }}
+    heritage: Tiller
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kubernetes.io/tls-acme: "true"
+spec:
+  tls:
+    - hosts:
+        - dashboard.{{ .Values.name }}.{{ .Values.domain }}
+      secretName: {{ .Values.name }}-dashboard-tls
+  rules:
+    - host: dashboard.{{ .Values.name }}.{{ .Values.domain }}
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: microverse-app-{{ .Values.name }}-dashboard
+              servicePort: 80
