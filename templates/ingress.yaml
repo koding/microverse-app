@@ -13,13 +13,13 @@ metadata:
 spec:
   tls:
     - hosts:
-        - {{ .Values.name }}.{{ .Values.domain }}
+        - app.{{ .Values.domain }}
       secretName: {{ .Values.name }}-tls
   rules:
-    - host: {{ .Values.name }}.{{ .Values.domain }}
+    - host: app.{{ .Values.domain }}
       http:
         paths:
-          - path: /
+          - path: /{{ .Values.name }}
             backend:
               serviceName: microverse-app-{{ .Values.name }}
               servicePort: 80
@@ -39,13 +39,13 @@ metadata:
 spec:
   tls:
     - hosts:
-        - dashboard.{{ .Values.name }}.{{ .Values.domain }}
+        - dashboard.{{ .Values.domain }}
       secretName: {{ .Values.name }}-dashboard-tls
   rules:
-    - host: dashboard.{{ .Values.name }}.{{ .Values.domain }}
+    - host: dashboard.{{ .Values.domain }}
       http:
         paths:
-          - path: /
+          - path: /{{ .Values.name }}
             backend:
-              serviceName: microverse-app-{{ .Values.name }}-dashboard
+              serviceName: microverse-dashboard-{{ .Values.name }}
               servicePort: 80

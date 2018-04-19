@@ -21,7 +21,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: microverse-app-{{ .Values.name }}-dashboard
+  name: microverse-dashboard-{{ .Values.name }}
   labels:
     app: microverse-app-{{ .Values.name }}
     chart: microverse-app-{{ .Values.name }}-0.0.1
