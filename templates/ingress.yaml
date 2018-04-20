@@ -14,7 +14,7 @@ spec:
   tls:
     - hosts:
         - app.{{ .Values.domain }}
-      secretName: {{ .Values.name }}-tls
+      secretName: microverse-app-tls
   rules:
     - host: app.{{ .Values.domain }}
       http:
@@ -27,9 +27,9 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: microverse-app-{{ .Values.name }}-dashboard
+  name: microverse-dashboard-{{ .Values.name }}
   labels:
-    app: microverse-app-{{ .Values.name }}-dashboard
+    app: microverse-dashboard-{{ .Values.name }}
     chart: microverse-app-{{ .Values.name }}-0.0.1
     release: {{ .Values.name }}
     heritage: Tiller
@@ -40,7 +40,7 @@ spec:
   tls:
     - hosts:
         - dashboard.{{ .Values.domain }}
-      secretName: {{ .Values.name }}-dashboard-tls
+      secretName: microverse-dashboard-tls
   rules:
     - host: dashboard.{{ .Values.domain }}
       http:
