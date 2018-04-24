@@ -37,3 +37,43 @@ spec:
   selector:
     app: microverse-app-{{ .Values.name }}
     release: {{ .Values.name }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: microverse-ice-{{ .Values.name }}
+  labels:
+    app: microverse-app-{{ .Values.name }}
+    chart: microverse-app-{{ .Values.name }}-0.0.1
+    release: {{ .Values.name }}
+    heritage: Tiller
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 3033
+    protocol: TCP
+    name: ice
+  selector:
+    app: microverse-app-{{ .Values.name }}
+    release: {{ .Values.name }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: microverse-bootstrap-{{ .Values.name }}
+  labels:
+    app: microverse-app-{{ .Values.name }}
+    chart: microverse-app-{{ .Values.name }}-0.0.1
+    release: {{ .Values.name }}
+    heritage: Tiller
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 3040
+    protocol: TCP
+    name: bootstrap
+  selector:
+    app: microverse-app-{{ .Values.name }}
+    release: {{ .Values.name }}

@@ -27,6 +27,9 @@ spec:
             - name: ice
               containerPort: 3033
               protocol: TCP
+            - name: bootstrap
+              containerPort: 3040
+              protocol: TCP
             - name: dashboard
               containerPort: 3030
               protocol: TCP
