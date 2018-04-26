@@ -1,79 +1,25 @@
-apiVersion: v1
-kind: Service
-metadata:
-  name: {{ template "microverse.name" . }}
-  labels:
-    app: {{ template "microverse.name" . }}
-    chart: {{ template "microverse.name" . }}-0.0.1
-    release: {{ .Values.name }}
-    heritage: Tiller
-spec:
-  type: ClusterIP
-  ports:
-  - port: 80
-    targetPort: 3000
-    protocol: TCP
-    name: app
-  selector:
-    app: {{ template "microverse.name" . }}
-    release: {{ .Values.name }}
+{{- $context := . -}}    
+{{- range .Values.ports }}
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: microverse-dashboard-{{ .Values.name }}
+  name: microverse-{{ .name }}-{{ $context.Values.name }}
   labels:
-    app: {{ template "microverse.name" . }}
-    chart: {{ template "microverse.name" . }}-0.0.1
-    release: {{ .Values.name }}
+    app: {{ template "microverse.name" $context }}
+    chart: {{ template "microverse.name" $context }}-0.0.1
+    release: {{ $context.Values.name }}
     heritage: Tiller
 spec:
   type: ClusterIP
   ports:
   - port: 80
-    targetPort: 3030
+    targetPort: {{ .port }}
     protocol: TCP
-    name: dashboard
+    name: {{ .name }}
   selector:
-    app: {{ template "microverse.name" . }}
-    release: {{ .Values.name }}
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: microverse-ice-{{ .Values.name }}
-  labels:
-    app: {{ template "microverse.name" . }}
-    chart: {{ template "microverse.name" . }}-0.0.1
-    release: {{ .Values.name }}
-    heritage: Tiller
-spec:
-  type: ClusterIP
-  ports:
-  - port: 80
-    targetPort: 3033
-    protocol: TCP
-    name: ice
-  selector:
-    app: {{ template "microverse.name" . }}
-    release: {{ .Values.name }}
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: microverse-bootstrap-{{ .Values.name }}
-  labels:
-    app: {{ template "microverse.name" . }}
-    chart: {{ template "microverse.name" . }}-0.0.1
-    release: {{ .Values.name }}
-    heritage: Tiller
-spec:
-  type: ClusterIP
-  ports:
-  - port: 80
-    targetPort: 3040
-    protocol: TCP
-    name: bootstrap
-  selector:
-    app: {{ template "microverse.name" . }}
-    release: {{ .Values.name }}
+    app: {{ template "microverse.name" $context }}
+    release: {{ $context.Values.name }}
+{{- end }}
+
+
