@@ -1,0 +1,15 @@
+ports:
+  - name: ice
+    port: 3033
+  - name: bootstrap
+    port: 3040
+  - name: dashboard
+    port: 3030
+  - name: app
+    port: 3000
+
+repository: gcr.io/kodingdev-vms
+tag: latest
+domain: kloud.sh
+name: "cihangir" 
+domain: "savas.io"

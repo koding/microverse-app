@@ -1,10 +1,10 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: microverse-app-{{ .Values.name }}
+  name: {{ template "microverse.name" . }}
   labels:
-    app: microverse-app-{{ .Values.name }}
-    chart: microverse-app-{{ .Values.name }}-0.0.1
+    app: {{ template "microverse.name" . }}
+    chart: {{ template "microverse.name" . }}-0.0.1
     release: {{ .Values.name }}
     heritage: Tiller
   annotations:
@@ -21,7 +21,7 @@ spec:
         paths:
           - path: /{{ .Values.name }}
             backend:
-              serviceName: microverse-app-{{ .Values.name }}
+              serviceName: {{ template "microverse.name" . }}
               servicePort: 80
 ---
 apiVersion: extensions/v1beta1
@@ -29,8 +29,8 @@ kind: Ingress
 metadata:
   name: microverse-dashboard-{{ .Values.name }}
   labels:
-    app: microverse-app-{{ .Values.name }}
-    chart: microverse-app-{{ .Values.name }}-0.0.1
+    app: {{ template "microverse.name" . }}
+    chart: {{ template "microverse.name" . }}-0.0.1
     release: {{ .Values.name }}
     heritage: Tiller
   annotations:
@@ -55,8 +55,8 @@ kind: Ingress
 metadata:
   name: microverse-ice-{{ .Values.name }}
   labels:
-    app: microverse-app-{{ .Values.name }}
-    chart: microverse-app-{{ .Values.name }}-0.0.1
+    app: {{ template "microverse.name" . }}
+    chart: {{ template "microverse.name" . }}-0.0.1
     release: {{ .Values.name }}
     heritage: Tiller
   annotations:
@@ -82,8 +82,8 @@ kind: Ingress
 metadata:
   name: microverse-bootstrap-{{ .Values.name }}
   labels:
-    app: microverse-app-{{ .Values.name }}
-    chart: microverse-app-{{ .Values.name }}-0.0.1
+    app: {{ template "microverse.name" . }}
+    chart: {{ template "microverse.name" . }}-0.0.1
     release: {{ .Values.name }}
     heritage: Tiller
   annotations:
