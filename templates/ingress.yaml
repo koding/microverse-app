@@ -1,4 +1,4 @@
-{{- $context := . -}}
+{{- $context := . -}}    
 {{- range .Values.ports }}
 ---
 apiVersion: extensions/v1beta1
@@ -13,10 +13,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     kubernetes.io/tls-acme: "true"
-    ingress.kubernetes.io/rewrite-target: "/"
-    {{- if .websocket -}}
     nginx.org/websocket-services: microverse-{{ .name }}-{{ $context.Values.name }}
-    {{- end -}}
 spec:
   tls:
     - hosts:
@@ -32,3 +29,4 @@ spec:
               servicePort: 80
 
 {{- end }}
+

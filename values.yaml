@@ -1,10 +1,8 @@
 ports:
   - name: ice
     port: 3033
-    websocket: true
   - name: bootstrap
     port: 3040
-    websocket: true
   - name: dashboard
     port: 3030
   - name: app
@@ -13,3 +11,5 @@ ports:
 repository: gcr.io/kodingdev-vms
 tag: latest
 domain: kloud.sh
+name: "cihangir" 
+domain: "savas.io"
