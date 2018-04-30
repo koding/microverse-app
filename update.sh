@@ -13,7 +13,7 @@ main() {
 	refmt set Chart.yaml version ${new_version}
 	helm package .
 	mv ${new_pkg} docs/
-	rm docs/${old_pkg}
+	rm -f docs/${old_pkg}
 	git add docs/${new_pkg}
 	helm repo index docs --url https://koding.github.com/microverse-app
 }
