@@ -1,32 +1,105 @@
-{{- $context := . -}}    
-{{- range .Values.ports }}
----
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: microverse-{{ .name }}-{{ $context.Values.name }}
+  name: {{ template "microverse.name" . }}
   labels:
-    app: {{ template "microverse.name" $context }}
-    chart: {{ template "microverse.name" $context }}-0.0.1
-    release: {{ $context.Values.name }}
+    app: {{ template "microverse.name" . }}
+    chart: {{ template "microverse.name" . }}-0.0.1
+    release: {{ .Values.name }}
     heritage: Tiller
   annotations:
     kubernetes.io/ingress.class: nginx
     kubernetes.io/tls-acme: "true"
-    nginx.org/websocket-services: microverse-{{ .name }}-{{ $context.Values.name }}
 spec:
   tls:
     - hosts:
-        - {{ .name }}.{{ $context.Values.domain }}
-      secretName: microverse-{{ .name }}-tls
+        - app.{{ .Values.domain }}
+      secretName: microverse-app-tls
   rules:
-    - host: {{ .name }}.{{ $context.Values.domain }}
+    - host: app.{{ .Values.domain }}
       http:
         paths:
-          - path: /{{ $context.Values.name }}
+          - path: /{{ .Values.name }}
             backend:
-              serviceName: microverse-{{ .name }}-{{ $context.Values.name }}
+              serviceName: {{ template "microverse.name" . }}
               servicePort: 80
-
-{{- end }}
-
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: microverse-dashboard-{{ .Values.name }}
+  labels:
+    app: {{ template "microverse.name" . }}
+    chart: {{ template "microverse.name" . }}-0.0.1
+    release: {{ .Values.name }}
+    heritage: Tiller
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kubernetes.io/tls-acme: "true"
+spec:
+  tls:
+    - hosts:
+        - dashboard.{{ .Values.domain }}
+      secretName: microverse-dashboard-tls
+  rules:
+    - host: dashboard.{{ .Values.domain }}
+      http:
+        paths:
+          - path: /{{ .Values.name }}
+            backend:
+              serviceName: microverse-dashboard-{{ .Values.name }}
+              servicePort: 80
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: microverse-ice-{{ .Values.name }}
+  labels:
+    app: {{ template "microverse.name" . }}
+    chart: {{ template "microverse.name" . }}-0.0.1
+    release: {{ .Values.name }}
+    heritage: Tiller
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kubernetes.io/tls-acme: "true"
+    nginx.org/websocket-services: microverse-ice-{{ .Values.name }}
+spec:
+  tls:
+    - hosts:
+        - ice.{{ .Values.domain }}
+      secretName: microverse-ice-tls
+  rules:
+    - host: ice.{{ .Values.domain }}
+      http:
+        paths:
+          - path: /{{ .Values.name }}
+            backend:
+              serviceName: microverse-ice-{{ .Values.name }}
+              servicePort: 80
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: microverse-bootstrap-{{ .Values.name }}
+  labels:
+    app: {{ template "microverse.name" . }}
+    chart: {{ template "microverse.name" . }}-0.0.1
+    release: {{ .Values.name }}
+    heritage: Tiller
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kubernetes.io/tls-acme: "true"
+    nginx.org/websocket-services: microverse-bootstrap-{{ .Values.name }}
+spec:
+  tls:
+    - hosts:
+        - bootstrap.{{ .Values.domain }}
+      secretName: microverse-ice-tls
+  rules:
+    - host: bootstrap.{{ .Values.domain }}
+      http:
+        paths:
+          - path: /{{ .Values.name }}
+            backend:
+              serviceName: microverse-bootstrap-{{ .Values.name }}
+              servicePort: 80
