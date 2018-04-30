@@ -10,7 +10,6 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     kubernetes.io/tls-acme: "true"
-    ingress.kubernetes.io/rewrite-target: "/"
 spec:
   tls:
     - hosts:
@@ -37,7 +36,6 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     kubernetes.io/tls-acme: "true"
-    ingress.kubernetes.io/rewrite-target: "/"
 spec:
   tls:
     - hosts:
