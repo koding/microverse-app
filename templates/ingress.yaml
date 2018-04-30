@@ -10,6 +10,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     kubernetes.io/tls-acme: "true"
+    ingress.kubernetes.io/rewrite-target: "/"
 spec:
   tls:
     - hosts:
@@ -36,6 +37,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     kubernetes.io/tls-acme: "true"
+    ingress.kubernetes.io/rewrite-target: "/"
 spec:
   tls:
     - hosts:
@@ -62,6 +64,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     kubernetes.io/tls-acme: "true"
+    ingress.kubernetes.io/rewrite-target: "/"
     nginx.org/websocket-services: microverse-ice-{{ .Values.name }}
 spec:
   tls:
@@ -89,12 +92,13 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     kubernetes.io/tls-acme: "true"
+    ingress.kubernetes.io/rewrite-target: "/"
     nginx.org/websocket-services: microverse-bootstrap-{{ .Values.name }}
 spec:
   tls:
     - hosts:
         - bootstrap.{{ .Values.domain }}
-      secretName: microverse-ice-tls
+      secretName: microverse-bootstrap-tls
   rules:
     - host: bootstrap.{{ .Values.domain }}
       http:
