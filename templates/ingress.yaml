@@ -63,7 +63,6 @@ metadata:
     kubernetes.io/ingress.class: nginx
     kubernetes.io/tls-acme: "true"
     nginx.org/websocket-services: microverse-ice-{{ .Values.name }}
-    ingress.kubernetes.io/enable-cors: "true"
 spec:
   tls:
     - hosts:
@@ -91,7 +90,6 @@ metadata:
     kubernetes.io/ingress.class: nginx
     kubernetes.io/tls-acme: "true"
     nginx.org/websocket-services: microverse-bootstrap-{{ .Values.name }}
-    ingress.kubernetes.io/enable-cors: "true"
 spec:
   tls:
     - hosts:
