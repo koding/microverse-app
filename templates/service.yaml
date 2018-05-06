@@ -1,11 +1,14 @@
+{{- $fullname := include "microverse.name" . -}}
+{{- $name := .Values.name | default .Release.Name -}}
+{{- $chartname := include "microverse.chartname" . -}}
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ template "microverse.name" . }}
+  name: {{ $fullname }}
   labels:
-    app: {{ template "microverse.name" . }}
-    chart: {{ template "microverse.name" . }}-0.0.1
-    release: {{ .Values.name }}
+    app: {{ $fullname }}
+    chart: {{ $chartname }}
+    release: {{ $name }}
     heritage: Tiller
 spec:
   type: ClusterIP
@@ -15,17 +18,17 @@ spec:
     protocol: TCP
     name: app
   selector:
-    app: {{ template "microverse.name" . }}
-    release: {{ .Values.name }}
+    app: {{ $fullname }}
+    release: {{ $name }}
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: microverse-dashboard-{{ .Values.name }}
+  name: microverse-dashboard-{{ $name }}
   labels:
-    app: {{ template "microverse.name" . }}
-    chart: {{ template "microverse.name" . }}-0.0.1
-    release: {{ .Values.name }}
+    app: {{ $fullname }}
+    chart: {{ $chartname }}
+    release: {{ $name }}
     heritage: Tiller
 spec:
   type: ClusterIP
@@ -35,17 +38,17 @@ spec:
     protocol: TCP
     name: dashboard
   selector:
-    app: {{ template "microverse.name" . }}
-    release: {{ .Values.name }}
+    app: {{ $fullname }}
+    release: {{ $name }}
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: microverse-ice-{{ .Values.name }}
+  name: microverse-ice-{{ $name }}
   labels:
-    app: {{ template "microverse.name" . }}
-    chart: {{ template "microverse.name" . }}-0.0.1
-    release: {{ .Values.name }}
+    app: {{ $fullname }}
+    chart: {{ $chartname }}
+    release: {{ $name }}
     heritage: Tiller
 spec:
   type: ClusterIP
@@ -55,17 +58,17 @@ spec:
     protocol: TCP
     name: ice
   selector:
-    app: {{ template "microverse.name" . }}
-    release: {{ .Values.name }}
+    app: {{ $fullname }}
+    release: {{ $name }}
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: microverse-bootstrap-{{ .Values.name }}
+  name: microverse-bootstrap-{{ $name }}
   labels:
-    app: {{ template "microverse.name" . }}
-    chart: {{ template "microverse.name" . }}-0.0.1
-    release: {{ .Values.name }}
+    app: {{ $fullname }}
+    chart: {{ $chartname }}
+    release: {{ $name }}
     heritage: Tiller
 spec:
   type: ClusterIP
@@ -75,5 +78,5 @@ spec:
     protocol: TCP
     name: bootstrap
   selector:
-    app: {{ template "microverse.name" . }}
-    release: {{ .Values.name }}
+    app: {{ $fullname }}
+    release: {{ $name }}

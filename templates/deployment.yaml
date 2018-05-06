@@ -1,27 +1,31 @@
+{{- $fullname := include "microverse.name" . -}}
+{{- $name := .Values.name | default .Release.Name -}}
+{{- $chartname := include "microverse.chartname" . -}}
+{{- $image := include "microverse.image" . -}}
 apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
-  name: {{ template "microverse.name" . }}
+  name: {{ $fullname }}
   labels:
-    app: {{ template "microverse.name" . }}
-    chart: {{ template "microverse.name" . }}-0.0.1
-    release: {{ .Values.name }}
+    app: {{ $fullname }}
+    chart: {{ $chartname }}
+    release: {{ $name }}
     heritage: Tiller
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ template "microverse.name" . }}
-      release: {{ .Values.name }}
+      app: {{ $fullname }}
+      release: {{ $name }}
   template:
     metadata:
       labels:
-        app: {{ template "microverse.name" . }}
-        release: {{ .Values.name }}
+        app: {{ $fullname }}
+        release: {{ $name }}
     spec:
       containers:
-        - name: {{ template "microverse.name" . }}
-          image: {{ .Values.repository }}/{{ template "microverse.name" . }}:{{ .Values.tag }}
+        - name: {{ $fullname }}
+          image: {{ $image }}
           imagePullPolicy: IfNotPresent
           ports:
             - name: ice
