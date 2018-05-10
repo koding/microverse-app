@@ -23,10 +23,23 @@ spec:
         app: {{ $fullname }}
         release: {{ $name }}
     spec:
+      {{- if .Values.nodeSelector }}
+      nodeSelector:
+        {{- range $k, $v := .Values.nodeSelector }}
+          {{ $k }}: {{ $v }}
+        {{ end -}}
+      {{ end }}
       containers:
         - name: {{ $fullname }}
           image: {{ $image }}
           imagePullPolicy: IfNotPresent
+          {{- if .Values.env }}
+          env:
+            {{- range $k, $v := .Values.env }}
+            - name: {{ $k }}
+              value: {{ $v }}
+            {{ end -}}
+          {{ end }}
           ports:
             - name: ice
               containerPort: 3033
