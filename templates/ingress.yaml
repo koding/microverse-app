@@ -12,7 +12,7 @@ metadata:
     release: {{ $name }}
     heritage: Tiller
   annotations:
-    kubernetes.io/ingress.class: nginx
+    kubernetes.io/ingress.class: "nginx"
     kubernetes.io/tls-acme: "true"
 spec:
   tls:
@@ -38,7 +38,7 @@ metadata:
     release: {{ $name }}
     heritage: Tiller
   annotations:
-    kubernetes.io/ingress.class: nginx
+    kubernetes.io/ingress.class: "nginx"
     kubernetes.io/tls-acme: "true"
 spec:
   tls:
@@ -64,10 +64,10 @@ metadata:
     release: {{ $name }}
     heritage: Tiller
   annotations:
-    kubernetes.io/ingress.class: nginx
+    kubernetes.io/ingress.class: "nginx"
     kubernetes.io/tls-acme: "true"
     ingress.kubernetes.io/rewrite-target: "/"
-    nginx.org/websocket-services: microverse-ice-{{ $name }}
+    nginx.org/websocket-services: "microverse-ice-{{ $name }}"
 spec:
   tls:
     - hosts:
@@ -92,9 +92,9 @@ metadata:
     release: {{ $name }}
     heritage: Tiller
   annotations:
-    kubernetes.io/ingress.class: nginx
+    kubernetes.io/ingress.class: "nginx"
     kubernetes.io/tls-acme: "true"
-    nginx.org/websocket-services: microverse-bootstrap-{{ $name }}
+    nginx.org/websocket-services: "microverse-bootstrap-{{ $name }}"
 spec:
   tls:
     - hosts:
