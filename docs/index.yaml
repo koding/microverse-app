@@ -3,11 +3,11 @@ entries:
   microverse-app:
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2018-05-10T16:42:03.931551771+02:00
+    created: 2018-05-13T12:41:06.982927388+02:00
     description: Library Chart for Microverse Applications
-    digest: 176484816a68ae4d9887342a4c5a147b29f14227f845904235679d8980bc799e
+    digest: c298b5efd251c699ef934957b2934983230d6bd005cef0f93d4c5ec66fc6a173
     name: microverse-app
     urls:
-    - https://koding.github.com/microverse-app/microverse-app-0.0.19.tgz
-    version: 0.0.19
-generated: 2018-05-10T16:42:03.930755665+02:00
+    - https://koding.github.com/microverse-app/microverse-app-0.0.20.tgz
+    version: 0.0.20
+generated: 2018-05-13T12:41:06.981047355+02:00
