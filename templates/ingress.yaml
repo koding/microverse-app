@@ -14,6 +14,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: "nginx"
     kubernetes.io/tls-acme: "true"
+    nginx.org/proxy-connect-timeout: "120s"
 spec:
   tls:
     - hosts:
@@ -40,6 +41,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: "nginx"
     kubernetes.io/tls-acme: "true"
+    nginx.org/proxy-connect-timeout: "120s"
 spec:
   tls:
     - hosts:
@@ -68,6 +70,7 @@ metadata:
     kubernetes.io/tls-acme: "true"
     nginx.ingress.kubernetes.io/rewrite-target: "/"
     nginx.org/websocket-services: "microverse-ice-{{ $name }}"
+    nginx.org/proxy-connect-timeout: "120s"
 spec:
   tls:
     - hosts:
@@ -95,6 +98,7 @@ metadata:
     kubernetes.io/ingress.class: "nginx"
     kubernetes.io/tls-acme: "true"
     nginx.org/websocket-services: "microverse-bootstrap-{{ $name }}"
+    nginx.org/proxy-connect-timeout: "120s"
 spec:
   tls:
     - hosts:
