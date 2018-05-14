@@ -26,7 +26,7 @@ spec:
       {{- if .Values.nodeSelector }}
       nodeSelector:
         {{- range $k, $v := .Values.nodeSelector }}
-          {{ $k }}: {{ $v }}
+          {{ $k }}: "{{ $v }}"
         {{ end -}}
       {{ end }}
       containers:
@@ -36,8 +36,8 @@ spec:
           {{- if .Values.env }}
           env:
             {{- range $k, $v := .Values.env }}
-            - name: {{ $k }}
-              value: {{ $v }}
+            - name: "{{ $k }}"
+              value: "{{ $v }}"
             {{ end -}}
           {{ end }}
           ports:
